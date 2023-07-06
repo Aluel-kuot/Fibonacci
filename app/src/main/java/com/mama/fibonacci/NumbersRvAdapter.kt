@@ -1,34 +1,37 @@
 package com.mama.fibonacci
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import java.math.BigInteger
 
-class NumbersRvAdapter (var fibonacci:List<Int>): RecyclerView.Adapter<NumbersViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumbersViewHolder {
-        var itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fibonacci_numbers,parent,false)
-        return NumbersViewHolder(TextView)
-
-    }
-
-
-    override fun onBindViewHolder(holder: NumbersViewHolder, position: Int) {
-        holder.tvNumbers.text=data[position].toString()
+class NumbersRvAdapter (var fibList:List<BigInteger>):RecyclerView.Adapter<fibViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): fibViewHolder {
+        val itemView=
+            LayoutInflater.from(parent.context).inflate(R.layout.fibonacci_numbers,parent,false)
+ return fibViewHolder(itemView)
 
     }
+
     override fun getItemCount(): Int {
-        return fibonacci.size
+        return fibList.size
     }
 
-class NamesViewHolder(itemView:View):ViewHolder(itemView){
-    var tvNumbers=itemView.findViewById<TextView>(R.id.tvNumbers)
+    override fun onBindViewHolder(holder: fibViewHolder, position: Int) {
+        var currentNumber=fibList.get(position).toString()
+        holder.tvNumbers.text=currentNumber
+    }
 
 }
+class fibViewHolder(var itemView: View):ViewHolder(itemView){
+    var tvNumbers=itemView.findViewById<TextView>(R.id.tvNumbers)
 }
+
+
+
+
+
 
